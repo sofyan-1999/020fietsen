@@ -69,6 +69,9 @@ class ProductController extends Controller
             $destinationPath = public_path('/bicycles');
             $img->save($destinationPath.'/'.$name,100);
             $product->image = 'bicycles/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'bicycles', $name
+            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;
@@ -140,6 +143,9 @@ class ProductController extends Controller
             $destinationPath = public_path('/bicycles');
             $img->save($destinationPath.'/'.$name,100);
             $product->image = 'bicycles/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'bicycles', $name
+            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;

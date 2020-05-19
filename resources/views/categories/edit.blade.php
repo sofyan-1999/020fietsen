@@ -93,7 +93,7 @@
                                     <label for="afbeeling">Afbeeling:</label>
                                     <input type="file" class="form-control-file" name="afbeelding">
                                     <br>
-                                    <img src="{{URL::asset($category->image)}}" alt="Category image" width="200" length="200">
+                                    <img src="{{asset('storage/'.$category->image)}}" alt="Category image" width="200" length="200">
                                     @if ($errors->has('afbeelding'))
                                         <p class="color-text text-margin">{{ $errors->first('afbeelding') }}</p>
                                     @endif
