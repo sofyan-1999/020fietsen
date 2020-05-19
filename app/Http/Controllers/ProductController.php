@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 
 use DB;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -47,6 +48,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'titel' => 'required',
+            'stock' => 'required',
             'conditie' => 'required',
             'beschrijving' => 'required',
             'prijs' => 'required|regex:/^\d*(\,\d{2})?$/|not_in:0',
@@ -57,13 +59,15 @@ class ProductController extends Controller
         $product = new Product;
         $product->title = ucfirst($request->input('titel'));
         $product->condition = $request->input('conditie');
+        $product->stock = $request->input('stock');
         $product->description = ucfirst($request->input('beschrijving'));
         $product->price = $request->input('prijs');
         if ($request->hasFile('afbeelding')) {
-            $image = $request->file('afbeelding');
-            $name = time().'.'.$image->getClientOriginalExtension();
+            $file = $request->file('afbeelding');
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $img = Image::make($file->getRealPath())->resize(370,278);
             $destinationPath = public_path('/bicycles');
-            $image->move($destinationPath, $name);
+            $img->save($destinationPath.'/'.$name,100);
             $product->image = 'bicycles/' . $name;
         }
         if($request->input('opHomePagina') == null){
@@ -120,19 +124,22 @@ class ProductController extends Controller
     {
         $request->validate([
             'prijs' => 'regex:/^\d*(\,\d{2})?$/|not_in:0',
+            'stock' => 'required',
             'afbeelding' => 'image',
         ]);
 
         $product = Product::find($id);
         $product->title = ucfirst($request->input('titel'));
+        $product->stock = $request->input('stock');
         $product->condition = $request->input('conditie');
         $product->description = ucfirst($request->input('beschrijving'));
         $product->price = $request->input('prijs');
         if ($request->hasFile('afbeelding')) {
-            $image = $request->file('afbeelding');
-            $name = time().'.'.$image->getClientOriginalExtension();
+            $file = $request->file('afbeelding');
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $img = Image::make($file->getRealPath())->resize(370,278);
             $destinationPath = public_path('/bicycles');
-            $image->move($destinationPath, $name);
+            $img->save($destinationPath.'/'.$name,100);
             $product->image = 'bicycles/' . $name;
         }
         if($request->input('opHomePagina') == null){
@@ -157,6 +164,7 @@ class ProductController extends Controller
     {
         // delete
         $product = Product::find($id);
+        unlink(public_path() .'/'. $product->image);
         $product->delete();
 
         return redirect('/');
