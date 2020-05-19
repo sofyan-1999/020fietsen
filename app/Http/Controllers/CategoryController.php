@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Category;
 
-use Image;
+use Intervention\Image\Facades\Image;
 
 
 class CategoryController extends Controller
@@ -47,8 +47,11 @@ class CategoryController extends Controller
         $category = new Category;
         $category->name = ucfirst($request->input('naam'));
         if ($request->hasFile('afbeelding')) {
-            $image = $request->file('afbeelding');
-            $name = time().'.'.$image->getClientOriginalExtension();
+            $file = $request->file('afbeelding');
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $img = Image::make($file->getRealPath())->resize(370,278);
+            $destinationPath = public_path('/categories');
+            $img->save($destinationPath.'/'.$name,100);
             $category->image = 'categories/' . $name;
             $request->file('afbeelding')->storeAs(
                 'categories', $name
@@ -100,8 +103,11 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->name = ucfirst($request->input('naam'));
         if ($request->hasFile('afbeelding')) {
-            $image = $request->file('afbeelding');
-            $name = time().'.'.$image->getClientOriginalExtension();
+            $file = $request->file('afbeelding');
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $img = Image::make($file->getRealPath())->resize(370,278);
+            $destinationPath = public_path('/categories');
+            $img->save($destinationPath.'/'.$name,100);
             $category->image = 'categories/' . $name;
             $request->file('afbeelding')->storeAs(
                 'categories', $name
@@ -121,6 +127,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        unlink(public_path() .'/'. $category->image);
         $category->delete();
 
         return redirect('/');
