@@ -129,6 +129,14 @@
                                     @endif
                                 </div>
                                 <div class="form-wrap">
+                                    <label for="price">Voorraad:</label>
+                                    <p class="inline color-text"> *</p>
+                                    <input class="form-input" type="number" name="stock" value="{{Request::old('stock')}}" placeholder="0">
+                                    @if ($errors->has('stock'))
+                                        <p class="color-text text-margin">{{ $errors->first('stock') }}</p>
+                                    @endif
+                                </div>
+                                <div class="form-wrap">
                                     <label for="condition">Categorie:</label>
                                     <br>
                                     <select name="category">

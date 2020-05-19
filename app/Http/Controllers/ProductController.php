@@ -48,6 +48,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'titel' => 'required',
+            'stock' => 'required',
             'conditie' => 'required',
             'beschrijving' => 'required',
             'prijs' => 'required|regex:/^\d*(\,\d{2})?$/|not_in:0',
@@ -58,6 +59,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->title = ucfirst($request->input('titel'));
         $product->condition = $request->input('conditie');
+        $product->stock = $request->input('stock');
         $product->description = ucfirst($request->input('beschrijving'));
         $product->price = $request->input('prijs');
         if ($request->hasFile('afbeelding')) {
@@ -122,11 +124,13 @@ class ProductController extends Controller
     {
         $request->validate([
             'prijs' => 'regex:/^\d*(\,\d{2})?$/|not_in:0',
+            'stock' => 'required',
             'afbeelding' => 'image',
         ]);
 
         $product = Product::find($id);
         $product->title = ucfirst($request->input('titel'));
+        $product->stock = $request->input('stock');
         $product->condition = $request->input('conditie');
         $product->description = ucfirst($request->input('beschrijving'));
         $product->price = $request->input('prijs');
