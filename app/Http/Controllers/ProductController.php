@@ -124,7 +124,6 @@ class ProductController extends Controller
     {
         $request->validate([
             'prijs' => 'regex:/^\d*(\,\d{2})?$/|not_in:0',
-            'stock' => 'required',
             'afbeelding' => 'image',
         ]);
 
