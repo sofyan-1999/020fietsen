@@ -58,7 +58,7 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                                 Fietsen
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    @foreach($errors as $category)
+                                                    @foreach($categories as $category)
                                                     <a class="dropdown-item" href="{{URL::asset('/products/' . $category->id)}}">{{$category->name}}</a>
                                                     @endforeach
                                                 </div>
@@ -122,7 +122,7 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                             <div class="wow fadeInUp">
                                 <div class="product-featured">
                                     <div class="product-featured-figure">
-                                        <img src="{{URL::asset($category->image)}}" alt="" width="370" height="395"/>
+                                        <img src="{{asset('storage/'.$category->image)}}" alt="" width="370" height="395"/>
                                         <div class="product-featured-button"><a class="button button-primary" href="{{URL::asset('/products/' . $category->id)}}">Bekijk</a></div>
                                     </div>
                                     <div class="product-featured-caption">
@@ -163,7 +163,7 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                             <div class="wow fadeInUp">
                                 <div class="product-featured">
                                     <div class="product-featured-figure">
-                                        <img src="{{URL::asset($product->image)}}" alt="" width="370" height="395"/>
+                                        <img src="{{asset('storage/'.$product->image)}}" alt="" width="370" height="395"/>
                                         <div class="product-featured-button"><a class="button button-primary" href="{{URL::asset('/product/' . $product->id)}}">Bekijk</a></div>
                                     </div>
                                     <div class="product-featured-caption">

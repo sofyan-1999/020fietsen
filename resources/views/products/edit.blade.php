@@ -156,7 +156,7 @@
                                     <label for="image">Afbeeling:</label>
                                     <input type="file" class="form-control-file" name="afbeelding">
                                     <br>
-                                    <img src="{{URL::asset($product->image)}}" alt="Product image" width="200" length="200">
+                                    <img src="{{asset('storage/'.$product->image)}}" alt="Product image" width="200" length="200">
                                     @if ($errors->has('afbeelding'))
                                         <p class="color-text text-margin">{{ $errors->first('afbeelding') }}</p>
                                     @endif

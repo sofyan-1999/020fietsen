@@ -62,9 +62,10 @@ class ProductController extends Controller
         if ($request->hasFile('afbeelding')) {
             $image = $request->file('afbeelding');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/bicycles');
-            $image->move($destinationPath, $name);
             $product->image = 'bicycles/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'bicycles', $name
+            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;
@@ -131,9 +132,10 @@ class ProductController extends Controller
         if ($request->hasFile('afbeelding')) {
             $image = $request->file('afbeelding');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/bicycles');
-            $image->move($destinationPath, $name);
             $product->image = 'bicycles/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'bicycles', $name
+            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;

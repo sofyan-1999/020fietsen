@@ -43,14 +43,16 @@ class CategoryController extends Controller
             'naam' => 'required',
             'afbeelding' => 'required|image|mimes:jpeg,jpg,gif,png,svg',
         ]);
+
         $category = new Category;
         $category->name = ucfirst($request->input('naam'));
         if ($request->hasFile('afbeelding')) {
             $image = $request->file('afbeelding');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/categories');
-            $image->move($destinationPath, $name);
             $category->image = 'categories/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'categories', $name
+            );
         }
         $category->save();
 
@@ -100,9 +102,10 @@ class CategoryController extends Controller
         if ($request->hasFile('afbeelding')) {
             $image = $request->file('afbeelding');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/categories');
-            $image->move($destinationPath, $name);
             $category->image = 'categories/' . $name;
+            $request->file('afbeelding')->storeAs(
+                'categories', $name
+            );
         }
         $category->save();
 
