@@ -94,7 +94,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                     <h2 class="text">{{$product->title}}</h2>
                     <div class="row">
                         <div class="col-sm-8">
-                            <img src="{{asset('storage/'.$product->image)}}" alt="Product afbeelding" height="auto" width="auto">
+                            <img src="{{asset('storage/'.$product->image)}}" alt="Product afbeelding" height="auto" width="500">
                             <h4>Kenmerken</h4>
                             <p>Conditie: {{$product->condition}}</p>
                             <br>

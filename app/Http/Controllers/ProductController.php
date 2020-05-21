@@ -66,12 +66,8 @@ class ProductController extends Controller
             $file = $request->file('afbeelding');
             $name = time().'.'.$file->getClientOriginalExtension();
             $img = Image::make($file->getRealPath())->resize(370,278);
-            $destinationPath = public_path('/bicycles');
-            $img->save($destinationPath.'/'.$name,100);
+            $img->save(storage_path('app/public').'/bicycles/'.$name,100);
             $product->image = 'bicycles/' . $name;
-            $request->file('afbeelding')->storeAs(
-                'bicycles', $name
-            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;
@@ -140,12 +136,8 @@ class ProductController extends Controller
             $file = $request->file('afbeelding');
             $name = time().'.'.$file->getClientOriginalExtension();
             $img = Image::make($file->getRealPath())->resize(370,278);
-            $destinationPath = public_path('/bicycles');
-            $img->save($destinationPath.'/'.$name,100);
+            $img->save(storage_path('app/public').'/bicycles/'.$name,100);
             $product->image = 'bicycles/' . $name;
-            $request->file('afbeelding')->storeAs(
-                'bicycles', $name
-            );
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;
@@ -169,7 +161,6 @@ class ProductController extends Controller
     {
         // delete
         $product = Product::find($id);
-        unlink(public_path() .'/'. $product->image);
         $product->delete();
 
         return redirect('/');

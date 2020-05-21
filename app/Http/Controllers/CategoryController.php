@@ -41,21 +41,16 @@ class CategoryController extends Controller
     {
         $request->validate([
             'naam' => 'required',
-            'afbeelding' => 'required|image|mimes:jpeg,jpg,gif,png,svg',
+            'afbeelding' => 'required|mimes:jpeg,jpg,gif,png,svg',
         ]);
-
         $category = new Category;
         $category->name = ucfirst($request->input('naam'));
         if ($request->hasFile('afbeelding')) {
             $file = $request->file('afbeelding');
             $name = time().'.'.$file->getClientOriginalExtension();
             $img = Image::make($file->getRealPath())->resize(370,278);
-            $destinationPath = public_path('/categories');
-            $img->save($destinationPath.'/'.$name,100);
+            $img->save(storage_path('app/public').'/categories/'.$name,100);
             $category->image = 'categories/' . $name;
-            $request->file('afbeelding')->storeAs(
-                'categories', $name
-            );
         }
         $category->save();
 
@@ -106,12 +101,8 @@ class CategoryController extends Controller
             $file = $request->file('afbeelding');
             $name = time().'.'.$file->getClientOriginalExtension();
             $img = Image::make($file->getRealPath())->resize(370,278);
-            $destinationPath = public_path('/categories');
-            $img->save($destinationPath.'/'.$name,100);
+            $img->save(storage_path('app/public').'/categories/'.$name,100);
             $category->image = 'categories/' . $name;
-            $request->file('afbeelding')->storeAs(
-                'categories', $name
-            );
         }
         $category->save();
 
@@ -127,7 +118,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        unlink(public_path() .'/'. $category->image);
         $category->delete();
 
         return redirect('/');
