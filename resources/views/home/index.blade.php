@@ -68,10 +68,10 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                             <li class="rd-nav-item">
                                                 @if(Auth::check())
                                                     <form method="POST" id="logout-form" action="{{ route ('logout') }}">@csrf</form>
-                                                    <a class="rd-nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                                    <a class="rd-nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Uitloggen</a>
                                                 @else
-                                                    <a class="rd-nav-link" href="{{ route ('login') }}">Login</a>
-                                                    <a class="rd-nav-link" href="{{ route ('register') }}">Register</a>
+                                                    <a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a>
+                                                    <a class="rd-nav-link" href="{{ route ('register') }}">Registreren</a>
                                                 @endif
                                             </li>
                                         </ul>
