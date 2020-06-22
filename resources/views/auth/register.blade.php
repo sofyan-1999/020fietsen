@@ -78,15 +78,15 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card card-register">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Registreer') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('voornaam') }}</label>
+                        <div class="form row">
+                            <div class="form-group col-sm-5">
+                                <label for="firstname">{{ __('voornaam') }}</label>
                                 <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" autofocus>
 
                                 @error('firstname')
@@ -96,9 +96,9 @@
                                 @enderror
                             </div>
 
-                            <label for="suffix" class="col-md-4 col-form-label text-md-right">{{ __('tussenvoegsel') }}</label>
-                            <div class="col-sm-3">
-                                <input id="suffix" type="text" class="form-control @error('suffix') is-invalid @enderror" name="suffix" value="{{ old('suffix') }}" required autocomplete="suffix" autofocus>
+                            <div class="form-group col-sm-2">
+                                <label for="suffix">{{ __('tussenvoegsel') }}</label>
+                                <input id="suffix" type="text" class="form-control @error('suffix') is-invalid @enderror" name="suffix" value="{{ old('suffix') }}" autocomplete="suffix" autofocus>
 
                                 @error('suffix')
                                 <span class="invalid-feedback" role="alert">
@@ -107,23 +107,8 @@
                                 @enderror
                             </div>
 
-                            <label for="suffix" class="col-md-4 col-form-label text-md-right">{{ __('tussenvoegsel') }}</label>
-
-                            <div class="col-sm-3">
-                                <input id="suffix" type="text" class="form-control @error('suffix') is-invalid @enderror" name="suffix" value="{{ old('suffix') }}" required autocomplete="suffix" autofocus>
-
-                                @error('suffix')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('achternaam') }}</label>
-
-                            <div class="col-sm-3">
+                            <div class="form-group col-sm-5">
+                                <label for="surname">{{ __('achternaam') }}</label>
                                 <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
 
                                 @error('surname')
@@ -132,10 +117,57 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div>
 
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="form row">
+                            <div class="form-group col-sm-4">
+                                <label for="city">{{ __('stad') }}</label>
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
 
-                            <div class="col-md-6">
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-sm-3">
+                                <label for="zipcode">{{ __('postcode') }}</label>
+                                <input id="zipcode" type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" value="{{ old('zipcode') }}" required autocomplete="zipcode" autofocus>
+
+                                @error('zipcode')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label for="street">{{ __('straat') }}</label>
+                                <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus>
+
+                                @error('street')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form row">
+                            <div class="form-group col-sm-2">
+                                <label for="street_number">{{ __('straatnummer') }}</label>
+                                <input id="street_number" type="number" class="form-control @error('street_number') is-invalid @enderror" name="street_number" value="{{ old('street_number') }}" required autocomplete="street_number" autofocus>
+
+                                @error('street_number')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-sm-5">
+                                <label for="email">{{ __('e-mail') }}</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -144,37 +176,29 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="form-group col-sm-5">
+                                <label for="password">{{ __('wachtwoord') }}</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
+                        <div class="form row">
+                            <div class="form-group col-sm-5">
+                                <label for="password-confirm">{{ __('bevestig wachtwoord') }}</label>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Register') }}
+                        </button>
                     </form>
                 </div>
             </div>

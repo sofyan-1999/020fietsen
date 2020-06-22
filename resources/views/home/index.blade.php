@@ -65,6 +65,15 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                             </li>
                                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{URL::asset('/contact')}}">Contact</a>
                                             </li>
+                                            <li class="rd-nav-item">
+                                                @if(Auth::check())
+                                                    <form method="POST" id="logout-form" action="{{ route ('logout') }}">@csrf</form>
+                                                    <a class="rd-nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                                @else
+                                                    <a class="rd-nav-link" href="{{ route ('login') }}">Login</a>
+                                                    <a class="rd-nav-link" href="{{ route ('register') }}">Register</a>
+                                                @endif
+                                            </li>
                                         </ul>
                                         <a class="button button-white button-sm hidden-button">book now</a>
                                     </div>

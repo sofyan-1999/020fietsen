@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Address;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,7 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:100'],
+            'surname' => ['required', 'string', 'max:100'],
+            'city' => ['required', 'string', 'max:80'],
+            'street' => ['required', 'string', 'max:80'],
+            'zipcode' => ['required', 'string', 'max:6'],
+            'street_number' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -63,11 +69,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $address = Address::create([
+            'city' => $data['city'],
+            'street' => $data['street'],
+            'street_number' => $data['street_number'],
+            'zipcode' => $data['zipcode'],
+        ]);
+
+        $user = User::create([
+            'name' => $data['firstname'].' '.$data['surname'],
+            'firstname' => $data['firstname'],
+            'suffix' => $data['suffix'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'role_id' => '2',
+            'address_id' => $address->id,
             'password' => Hash::make($data['password']),
         ]);
+
+        return $user;
     }
 }
