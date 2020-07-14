@@ -125,7 +125,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                             <div class="wow fadeInUp">
                                 <div class="product-featured">
                                     <div class="product-featured-figure">
-                                        <img src="{{URL::asset($product->image)}}" alt="Product image" class="image" width="370" height="395"/>
+                                        <img src="{{asset('storage/'.$product->image)}}" alt="Product image" class="image" width="370" height="395"/>
                                         <div class="product-featured-button"><a class="button button-primary" href="{{URL::asset('/product/' . $product->id)}}">Bekijk</a></div>
                                     </div>
                                     <div class="product-featured-caption">

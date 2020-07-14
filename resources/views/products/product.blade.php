@@ -91,10 +91,17 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
             </section>
             <section class="section section-lg bg-default">
                 <div class="container">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                     <h2 class="text">{{$product->title}}</h2>
                     <div class="row">
                         <div class="col-sm-8">
-                            <img src="{{asset('storage/'.$product->image)}}" alt="Product afbeelding" height="auto" width="500">
+                            <img src="{{asset('storage/'.$product->image_resize)}}" alt="Product afbeelding" height="auto" width="500">
+                            <br><br>
+                            <a href="{{asset('add/'.$product->id)}}"><button type="button" class="btn btn-primary">Bestel</button></a>
                             <h4>Kenmerken</h4>
                             <p>Conditie: {{$product->condition}}</p>
                             <br>

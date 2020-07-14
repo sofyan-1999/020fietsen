@@ -8,6 +8,7 @@ use App\Product;
 
 use DB;
 use Intervention\Image\Facades\Image;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -67,7 +68,12 @@ class ProductController extends Controller
             $name = time().'.'.$file->getClientOriginalExtension();
             $img = Image::make($file->getRealPath())->resize(370,278);
             $img->save(storage_path('app/public').'/bicycles/'.$name,100);
+            $nameOrignalImage = time().'1.'.$file->getClientOriginalExtension();
+            Storage::putFileAs(
+                'bicycles', $request->file('afbeelding'), $nameOrignalImage
+            );
             $product->image = 'bicycles/' . $name;
+            $product->image_resize = 'bicycles/' . $nameOrignalImage;
         }
         if($request->input('opHomePagina') == null){
             $product->home = 0;
@@ -89,7 +95,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = DB::table('products')->where('category_id', '=', $id)->paginate(15);
+        $products = DB::table('products')->where('category_id', '=', $id)->orderBy('price', 'asc')->paginate(15);
 
         // show the edit form and pass the nerd
         return view('products.show')

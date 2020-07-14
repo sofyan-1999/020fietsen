@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
 
+session_start();
+
 Route::get('/', function () {
     return view('home.index');
 });
@@ -31,6 +33,25 @@ Route::get('/about', function () {
 Route::get('/openinghours', function () {
     return view('openinghours.index');
 });
+Route::get('/shoppingCart', function () {
+    return view('shoppingCart.index');
+});
+Route::get('/shoppingCart/login', function () {
+    return view('shoppingCart.login');
+});
+Route::get('/shoppingCart/address', function () {
+    return view('shoppingCart.address');
+});
+Route::get('/shoppingCart/confirm', function () {
+    return view('shoppingCart.confirm');
+});
+
+
+Route::get('/add/{id}', 'ShoppingCartController@addToCart');
+
+Route::get('/remove/{id}', 'ShoppingCartController@removeFromCart');
+
+
 
 Auth::routes();
 

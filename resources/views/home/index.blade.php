@@ -1,6 +1,9 @@
 @php
 $categories = DB::table('categories')->orderBy('name', 'asc')->get();
-$products = DB::table('products')->where('home', '=', 1)->get();
+$products = DB::table('products')->where('home', '=', 1)->orderBy('price', 'asc')->get();
+if(isset($_SESSION['cart']['products'])){
+    $countProducts = count($_SESSION['cart']['products']);
+}
 @endphp
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -66,7 +69,6 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{URL::asset('/contact')}}">Contact</a>
                                             </li>
                                         </ul>
-                                        <a class="button button-white button-sm hidden-button">book now</a>
                                     </div>
                                 </div>
                                 @if (Auth::check())
@@ -79,7 +81,14 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                 </form>
                                 @endif
                                 @endif
-                                <a class="button button-white button-sm hidden-button">book now</a>
+
+                                <div class="rd-navbar-nav-wrap">
+                                    <ul class="rd-navbar-nav">
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="{{URL::asset('/shoppingCart')}}"><i class="fa fa-shopping-cart" style="font-size:24px;color:white"></i></a></li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="#">Inloggen</a></li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="#">Registreren</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </nav>

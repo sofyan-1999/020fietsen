@@ -1,4 +1,3 @@
-@extends('layouts.app')
 @php
     $categories = DB::table('categories')->get();
 @endphp

@@ -131,7 +131,7 @@
                                 <div class="form-wrap">
                                     <label for="price">Voorraad:</label>
                                     <p class="inline color-text"> *</p>
-                                    <input class="form-input" type="number" name="stock" value="{{Request::old('stock')}}" placeholder="0">
+                                    <input class="form-input" type="number" name="stock" value="{{$product->stock}}" placeholder="0">
                                     @if ($errors->has('stock'))
                                         <p class="color-text text-margin">{{ $errors->first('stock') }}</p>
                                     @endif
