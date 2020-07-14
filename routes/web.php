@@ -55,6 +55,7 @@ Route::get('/remove/{id}', 'ShoppingCartController@removeFromCart');
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/category/create', 'CategoryController@create')->middleware('auth');

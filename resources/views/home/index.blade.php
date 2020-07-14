@@ -68,6 +68,15 @@ if(isset($_SESSION['cart']['products'])){
                                             </li>
                                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{URL::asset('/contact')}}">Contact</a>
                                             </li>
+                                            <li class="rd-nav-item">
+                                                @if(Auth::check())
+                                                    <form method="POST" id="logout-form" action="{{ route ('logout') }}">@csrf</form>
+                                                    <a class="rd-nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Uitloggen</a>
+                                                @else
+                                                    <a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a>
+                                                    <a class="rd-nav-link" href="{{ route ('register') }}">Registreren</a>
+                                                @endif
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
