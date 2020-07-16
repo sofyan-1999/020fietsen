@@ -96,9 +96,13 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                         <div class="col-sm-8">
                             <img src="{{asset('storage/'.$product->image)}}" alt="Product afbeelding" height="auto" width="500">
                             <h4>Kenmerken</h4>
-                            <p>Conditie: {{$product->condition}}</p>
+                            <br>
+                            <ul class="list-group list-group-flush w-75">
+                                <li class="list-group-item"><p>Conditie: {{$product->condition}}</p></li>
+                            </ul>
                             <br>
                             <h4>Beschrijving</h4>
+                            <br>
                             {!! nl2br(e($product->description)) !!}
                         </div>
                         <div class="col-sm-4">
