@@ -33,6 +33,8 @@ Route::get('/about', function () {
 Route::get('/openinghours', function () {
     return view('openinghours.index');
 });
+
+//shoppincart
 Route::get('/shoppingCart', function () {
     return view('shoppingCart.index');
 });
@@ -41,11 +43,13 @@ Route::get('/shoppingCart/login', function () {
 });
 Route::get('/shoppingCart/address', function () {
     return view('shoppingCart.address');
-});
+})->middleware('auth');
+
 Route::get('/shoppingCart/confirm', function () {
     return view('shoppingCart.confirm');
-});
+})->middleware('auth');
 
+Route::patch('address/{id}',  ['as' => 'shoppingCart.address', 'uses' => 'ShoppingCartController@address'])->middleware('auth');
 
 Route::get('/add/{id}', 'ShoppingCartController@addToCart');
 

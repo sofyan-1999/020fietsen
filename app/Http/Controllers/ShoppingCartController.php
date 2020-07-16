@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\User;
 
 class ShoppingCartController extends Controller
 {
@@ -60,6 +61,31 @@ class ShoppingCartController extends Controller
         }
 
         $_SESSION['cart']['total'] = $totalPrice;
+    }
+
+
+    public function address(Request $request, $id){
+
+
+        $request->validate([
+            'straat' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:80'],
+            'huisnummer' => ['required', 'numeric'],
+            'toevoeging' => ['nullable', 'max:10', 'regex:/^[a-zA-Z1-9 ]+$/'],
+            'postcode' => ['required', 'regex:/^[1-9]{1}[0-9]{3}( |)[a-zA-z]{2}$/'],
+            'stad' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:80'],
+        ]);
+
+        $user = User::find($id);
+        $user->street = ucwords($request->input('straat'));
+        $user->house_number = trim($request->input('huisnummer'));
+        $user->house_number_suffix = strtoupper(trim($request->input('toevoeging')));
+        $user->zipcode = strtoupper($request->input('postcode'));
+        $user->city = ucfirst(trim($request->input('stad')));
+
+        $user->save();
+
+        return redirect("/shoppingCart/confirm");
+
     }
 
     // reset cart(leegmaken)

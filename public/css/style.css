@@ -2,6 +2,12 @@
     margin-bottom: 50px;
 } */
 
+.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
+
+.logout-form{
+    display: none;
+}
+
 .alert-success{
     color: #155724;
     background-color: #d4edda;
@@ -63,6 +69,29 @@
 }
 .progressbar li.active + li:after {
     background-color: #55b776;
+}
+
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+    border-radius: 15px;
+    line-height: 19px !important;
 }
 
 
