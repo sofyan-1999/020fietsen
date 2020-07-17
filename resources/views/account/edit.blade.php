@@ -88,7 +88,7 @@
     </section>
     <div class="container">
         @if(Session::has('success'))
-            <p class="alert alert-success">{{ Session::get('success') }}</p>
+            <p class="alert alert-success font-weight-bold">{{ Session::get('success') }}</p>
         @endif
 
         <form method="POST" action="{{ route('updateUser') }}">

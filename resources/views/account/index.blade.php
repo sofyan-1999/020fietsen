@@ -87,7 +87,29 @@
         </div>
     </section>
     <div class="container">
-        <a href="{{ url('/account/edit') }}">Account wijzigen</a>
+        <div class="row pt-4">
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;height: 10rem;">
+                    <div class="card-body">
+                        <a href="{{ url('/account/edit') }}">
+                            <h5 class="card-title">Gegevens wijzigen</h5>
+                            <p class="card-text">Wijzig je gegevens.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;height: 10rem;">
+                    <div class="card-body">
+                        <a href="#">
+                            <h5 class="card-title">Bestellingen/Aankopen</h5>
+                            <p class="card-text">Bekijk al je bestellingen en aankopen.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="snackbars" id="form-output-global"></div>
