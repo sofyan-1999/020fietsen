@@ -67,6 +67,7 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                                             </li>
                                             <li class="rd-nav-item">
                                                 @if(Auth::check())
+                                                    <a class="rd-nav-link" href="{{ url('account') }}">Account</a>
                                                     <form method="POST" id="logout-form" action="{{ route ('logout') }}">@csrf</form>
                                                     <a class="rd-nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Uitloggen</a>
                                                 @else

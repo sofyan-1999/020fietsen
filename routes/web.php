@@ -34,8 +34,12 @@ Route::get('/openinghours', function () {
 
 Auth::routes();
 
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/account','UserController@get')->middleware('auth');
+
+Route::get('/account/edit','UserController@getEditView');
+Route::post('/account/edit/post','UserController@update')->middleware('auth')->name('updateUser');
 
 Route::get('/category/create', 'CategoryController@create')->middleware('auth');
 
