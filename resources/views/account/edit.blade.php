@@ -130,63 +130,6 @@
             </div>
 
             <div class="form row">
-                <div class="form-group col-sm-4">
-                    <label for="city">{{ __('stad') }}</label>
-                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ \Illuminate\Support\Facades\Auth::user()->city  }}" required autocomplete="city" autofocus>
-
-                    @error('city')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-                </div>
-
-                <div class="form-group col-sm-3">
-                    <label for="zipcode">{{ __('postcode') }}</label>
-                    <input id="zipcode" type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" value="{{ \Illuminate\Support\Facades\Auth::user()->zipcode  }}" required autocomplete="zipcode" autofocus>
-
-                    @error('zipcode')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-                </div>
-
-                <div class="form-group col-sm-4">
-                    <label for="street">{{ __('straat') }}</label>
-                    <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ \Illuminate\Support\Facades\Auth::user()->street  }}" required autocomplete="street" autofocus>
-
-                    @error('street')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form row">
-                <div class="form-group col-sm-1">
-                    <label for="house_number">{{ __('straatnummer') }}</label>
-                    <input id="house_number" type="number" class="form-control @error('house_number') is-invalid @enderror" name="house_number" value="{{ \Illuminate\Support\Facades\Auth::user()->house_number  }}" required autocomplete="house_number" autofocus>
-
-                    @error('house_number')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-                </div>
-
-                <div class="form-group col-sm-1 pr-4 pl-4">
-                    <label for="street_number_suffix">{{ __('toevoeging') }}</label>
-                    <input id="street_number_suffix" type="number" class="form-control @error('street_number_suffix') is-invalid @enderror" name="house_number_suffix" value="{{ \Illuminate\Support\Facades\Auth::user()->house_number_suffix  }}" autocomplete="street_number_suffix" autofocus>
-
-                    @error('street_number_suffix')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-                </div>
-
                 <div class="form-group col-sm-3 pr-3">
                     <label for="email">{{ __('e-mail') }}</label>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ \Illuminate\Support\Facades\Auth::user()->email  }}" required autocomplete="email">

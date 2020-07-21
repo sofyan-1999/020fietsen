@@ -25,12 +25,8 @@ class UserController extends Controller
         $user->firstname = $request['firstname'];
         $user->suffix = $request['suffix'];
         $user->lastname = $request['lastname'];
-        $user->street = $request['street'];
-        $user->house_number = $request['house_number'];
-        $user->house_number_suffix = $request['house_number_suffix'];
-        $user->zipcode = $request['zipcode'];
-        $user->city = $request['city'];
         $user->email = $request['email'];
+        $user->password = $request['password'];
 
         $user->save();
 

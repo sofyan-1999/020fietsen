@@ -26,10 +26,6 @@ class UserUpdate extends FormRequest
         return [
             'firstname' => ['required', 'string', 'max:100'],
             'lastname' => ['required', 'string', 'max:100'],
-            'city' => ['required', 'string', 'max:80'],
-            'street' => ['required', 'string', 'max:80'],
-            'zipcode' => ['required', 'string', 'max:6'],
-            'house_number' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
