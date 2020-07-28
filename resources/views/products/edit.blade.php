@@ -91,9 +91,8 @@ $categories = DB::table('categories')->get();
                     </div>
                     <div class="form-wrap ">
                         <label for="image">Afbeeling:</label>
-                        <input type="file" class="form-control-file" name="afbeelding">
+                        <input type="file" class="form-control-file" name="afbeelding[]" multiple>
                         <br>
-                        <img src="{{asset('storage/'.$product->image)}}" alt="Product image" width="200" length="200">
                         @if ($errors->has('afbeelding'))
                         <p class="color-text text-margin">{{ $errors->first('afbeelding') }}</p>
                         @endif

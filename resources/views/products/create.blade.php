@@ -96,7 +96,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                     <div class="form-wrap">
                         <label for="image">Afbeeling:</label>
                         <p class="inline color-text"> *</p>
-                        <input type="file" class="form-control-file" name="afbeelding">
+                        <input type="file" class="form-control-file" name="afbeelding[]" multiple>
                         @if ($errors->has('afbeelding'))
                         <p class="color-text text-margin">{{ $errors->first('afbeelding') }}</p>
                         @endif

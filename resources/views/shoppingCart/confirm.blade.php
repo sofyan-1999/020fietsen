@@ -103,7 +103,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                             </tr>
                         </table>
                         <br>
-                        <a href="{{URL::asset('/shoppingCart/login')}}"><button class="btn btn-primary max-width-button">Bestellen en betalen</button></a>
+                        <a href="{{URL::asset('/mollietest')}}"><button class="btn btn-primary max-width-button">Bestellen en betalen</button></a>
                     </div>
                 </div>
             </div>

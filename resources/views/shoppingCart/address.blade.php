@@ -71,6 +71,8 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                             </span>
                         @enderror
                     </div>
+                    <p class="color-text">* is verplicht</p>
+                    <br>
                     <button class="btn btn-primary max-width-button">Volgende</buttom>
                 </form>
             </div>

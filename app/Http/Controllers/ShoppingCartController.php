@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
+use App\Order;
+use App\OrderProduct;
+use App\Product;
+use Auth;
+use Mollie\Laravel\Facades\Mollie;
 
 class ShoppingCartController extends Controller
 {
@@ -13,16 +18,37 @@ class ShoppingCartController extends Controller
     {
         if(isset($_SESSION['cart']['products'][$id])) {
             $_SESSION['cart']['products'][$id]['quantity'] += $quantity;
+
+            $artikelen = "artikelen";
+            if($_SESSION['cart']['products'][$id]['stock'] < $_SESSION['cart']['products'][$id]['quantity']){
+                $_SESSION['cart']['products'][$id]['quantity']--;
+
+                if($_SESSION['cart']['products'][$id]['stock'] == 1){
+                    $artikelen = "artikel";
+                }
+                return redirect()->back()->with('message_alert', 'Helaas, we hebben niet meer dan ' . $_SESSION['cart']['products'][$id]['stock'] . ' ' . $artikelen .' op voorraad');
+            }
+
         }
         else {
-            $product = DB::table('products')->where('id', '=', $id)->get();
+            $product = DB::table('products')
+                ->join('images', 'products.image_id', '=', 'images.id')
+                ->select('products.title', 'products.price', 'products.id', 'images.first_resized_image', 'products.stock')
+                ->where('products.id', '=', $id)
+                ->get();
+
+            if($product[0]->stock == 0){
+                return redirect()->back()->with('message_alert', 'Helaas, we hebben geen artikelen meer op voorraad');
+            }
+
 
             $_SESSION['cart']['products'][$id] = [
                 'quantity' => 1,
                 'title' => $product[0]->title,
                 'price' => $product[0]->price,
-                'image' => $product[0]->image,
-                'id' => $product[0]->id
+                'image' => $product[0]->first_resized_image,
+                'id' => $product[0]->id,
+                'stock' => $product[0]->stock,
             ];
         }
         // bereken
@@ -96,5 +122,55 @@ class ShoppingCartController extends Controller
             'products' => [],
             'total' => 0.00,
         ];
+    }
+
+
+
+    public function preparePayment()
+    {
+        $doublePrice = number_format($_SESSION['cart']['total'], 2, '.', '');
+        $totalPrice = strval($doublePrice);
+
+        $payment = Mollie::api()->payments->create([
+            "amount" => [
+                "currency" => "EUR",
+                "value" => $totalPrice
+            ],
+            "description" => "020 Fietsen",
+            "redirectUrl" => route('order.success'),
+        ]);
+
+        $payment = Mollie::api()->payments->get($payment->id);
+
+        // redirect customer to Mollie checkout page
+        return redirect($payment->getCheckoutUrl(), 303);
+    }
+
+    public function paymentSuccess() {
+
+
+
+
+        foreach($_SESSION['cart']['products'] as $cartProduct){
+            $order = new Order;
+            $order->user_id = Auth::user()->id;
+            $order->save();
+
+            $orderProduct = new OrderProduct;
+            $orderProduct->quantity = $cartProduct['quantity'];
+            $orderProduct->price = $cartProduct['price'];
+            $orderProduct->product_id = $cartProduct['id'];
+            $orderProduct->order_id = $order->id;
+            $orderProduct->save();
+
+            $product = Product::find($cartProduct['id']);
+            $product->stock = $product->stock - $cartProduct['quantity'];
+            $product->save();
+        }
+
+
+        self::reset();
+
+        return redirect("/success");
     }
 }

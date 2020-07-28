@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @php
 $categories = DB::table('categories')->orderBy('name', 'asc')->get();
-$products = DB::table('products')->where('home', '=', 1)->orderBy('price', 'asc')->get();
+$products = DB::table('products')
+    ->join('images', 'products.image_id', '=', 'images.id')
+    ->select('products.id', 'products.title', 'products.price', 'images.first_resized_image')
+    ->where('products.home', '=', 1)->orderBy('products.price', 'asc')
+    ->get();
 @endphp
 @section('content')
 <section class="section section-lg section-main-bunner section-main-bunner-filter text-center">
@@ -82,7 +86,7 @@ $products = DB::table('products')->where('home', '=', 1)->orderBy('price', 'asc'
                 <div class="wow fadeInUp">
                     <div class="product-featured">
                         <div class="product-featured-figure">
-                            <img src="{{asset('storage/'.$product->image)}}" alt="" width="370" height="395"/>
+                            <img src="{{asset('storage/'.$product->first_resized_image)}}" alt="" width="370" height="395"/>
                             <div class="product-featured-button"><a class="button button-primary" href="{{URL::asset('/product/' . $product->id)}}">Bekijk</a></div>
                         </div>
                         <div class="product-featured-caption">

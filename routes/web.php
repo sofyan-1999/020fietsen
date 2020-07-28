@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Mail;
 
 session_start();
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('home.index');
 });
@@ -32,6 +34,12 @@ Route::get('/about', function () {
 
 Route::get('/openinghours', function () {
     return view('openinghours.index');
+});
+
+Route::post('/contact', function(Request $request){
+    Mail::send(new ContactMail($request));
+    Session::flash('message', "Bedankt! je vraag is verzonden");
+    return redirect('/contact#form-contact');
 });
 
 //shoppincart
@@ -49,19 +57,20 @@ Route::get('/shoppingCart/confirm', function () {
     return view('shoppingCart.confirm');
 })->middleware('auth');
 
+Route::get('/success', function () {
+    return view('order.success');
+})->middleware('auth');
+
 Route::patch('address/{id}',  ['as' => 'shoppingCart.address', 'uses' => 'ShoppingCartController@address'])->middleware('auth');
 
 Route::get('/add/{id}', 'ShoppingCartController@addToCart');
 
 Route::get('/remove/{id}', 'ShoppingCartController@removeFromCart');
 
+Route::get('/mollietest', 'ShoppingCartController@preparePayment');
 
 
-Auth::routes();
-
-
-Route::get('/home', 'HomeController@index')->name('home');
-
+// category
 Route::get('/category/create', 'CategoryController@create')->middleware('auth');
 
 Route::post('/category', 'CategoryController@store')->middleware('auth');
@@ -72,15 +81,13 @@ Route::post('/category/{id}', 'CategoryController@update')->middleware('auth');
 
 Route::resource('categories', 'CategoryController');
 
+
 //products
-
 Route::resource('products', 'ProductController');
-
 
 Route::get('/product/{id}', 'ProductController@product');
 
-Route::post('/contact', function(Request $request){
-    Mail::send(new ContactMail($request));
-    Session::flash('message', "Bedankt! je vraag is verzonden");
-    return redirect('/contact#form-contact');
-});
+
+
+//test
+Route::get('/payment-success','ShoppingCartController@paymentSuccess')->name('order.success');
