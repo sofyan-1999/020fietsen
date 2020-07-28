@@ -18,4 +18,14 @@ class Product extends Model
         'home',
         'stock'
     ];
+
+    public function orderProduct()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Picture::class);
+    }
 }

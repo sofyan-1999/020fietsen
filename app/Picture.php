@@ -14,4 +14,9 @@ class Picture extends Model
         'second_original_image',
         'third_original_image',
     ];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

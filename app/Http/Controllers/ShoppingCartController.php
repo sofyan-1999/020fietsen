@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmation;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
@@ -9,6 +10,7 @@ use App\Order;
 use App\OrderProduct;
 use App\Product;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 use Mollie\Laravel\Facades\Mollie;
 
 class ShoppingCartController extends Controller
@@ -148,8 +150,7 @@ class ShoppingCartController extends Controller
 
     public function paymentSuccess() {
 
-
-
+        $orderConfirmationData = null;
 
         foreach($_SESSION['cart']['products'] as $cartProduct){
             $order = new Order;
@@ -163,11 +164,14 @@ class ShoppingCartController extends Controller
             $orderProduct->order_id = $order->id;
             $orderProduct->save();
 
+            $orderConfirmationData = $orderProduct;
+
             $product = Product::find($cartProduct['id']);
             $product->stock = $product->stock - $cartProduct['quantity'];
             $product->save();
         }
 
+        Mail::send(new OrderConfirmation($orderConfirmationData));
 
         self::reset();
 
