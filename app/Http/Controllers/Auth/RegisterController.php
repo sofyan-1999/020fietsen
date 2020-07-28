@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Address;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,9 +50,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'voornaam' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:100'],
+            'tussenvoegsel' => ['nullable', 'regex:/^[a-zA-Z ]+$/'],
+            'achternaam' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'wachtwoord' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -63,11 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        $user = User::create([
+            'firstname' => ucwords(trim($data['voornaam'])),
+            'suffix' => ucwords(trim($data['tussenvoegsel'])),
+            'lastname' => ucwords(trim($data['achternaam'])),
+            'email' => trim($data['email']),
+            'password' => Hash::make($data['wachtwoord']),
             'role_id' => '2',
-            'password' => Hash::make($data['password']),
         ]);
+
+        return $user;
     }
 }
