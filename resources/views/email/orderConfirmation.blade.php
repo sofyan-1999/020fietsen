@@ -1,3 +1,4 @@
+
 <h2>Bedankt voor jouw bestelling!</h2>
 <br>
 Beste {{ \Illuminate\Support\Facades\Auth::user()->firstname  }} ,
@@ -15,15 +16,21 @@ Besteldatum: {{ \Carbon\Carbon::now()->format('d-M-Y') }}
 <br><br>
 
 <p><b>Artikelen</b></p>
+{{--@foreach($products as $product)--}}
 <img src="http://127.0.0.1:8000/storage/{{ $product->image->first_resized_image }}" alt="img" style="width: 125px; height: 200px;">
 <br>
 Productnaam: {{ $product->title }}
 <br>
 Aantal: {{ $order->quantity }}
 <br>
-Prijs: {{ $product->price }}
+Prijs: €{{ $product->price }}
 <br>
 <hr>
+{{--@endforeach--}}
 <br>
 Betalingswijze: pp
+<br>
+Verzenden: gratis
+<br>
+Totaal: €{{ $order->price }}
 
