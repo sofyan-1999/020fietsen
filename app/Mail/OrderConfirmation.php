@@ -13,14 +13,20 @@ class OrderConfirmation extends Mailable
 
     public $order;
 
+    public $orderProduct = [];
+
+    public $totalPrice;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($orderConfirmationData)
+    public function __construct($orderConfirmationData, array $orderProductData, $totalPriceData)
     {
         $this->order = $orderConfirmationData;
+        $this->orderProduct = $orderProductData;
+        $this->totalPrice = $totalPriceData;
     }
 
     /**
@@ -35,7 +41,8 @@ class OrderConfirmation extends Mailable
             ->to('ceyhun70@live.nl')
             ->view('email.orderConfirmation')->with([
                 'order' => $this->order,
-                'product' => $this->order->product
+                'products' => $this->orderProduct,
+                'total' => $this->totalPrice
             ]);
     }
 }

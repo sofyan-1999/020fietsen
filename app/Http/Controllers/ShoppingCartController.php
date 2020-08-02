@@ -151,6 +151,8 @@ class ShoppingCartController extends Controller
     public function paymentSuccess() {
 
         $orderConfirmationData = null;
+        $orderProductData = [];
+        $totalPrice = null;
 
         foreach($_SESSION['cart']['products'] as $cartProduct){
             $order = new Order;
@@ -165,13 +167,15 @@ class ShoppingCartController extends Controller
             $orderProduct->save();
 
             $orderConfirmationData = $orderProduct;
+            $orderProductData[] = Product::findOrFail($orderProduct->product_id);
+            $totalPrice += $orderProduct->price;
 
             $product = Product::find($cartProduct['id']);
             $product->stock = $product->stock - $cartProduct['quantity'];
             $product->save();
         }
 
-        Mail::send(new OrderConfirmation($orderConfirmationData));
+        Mail::send(new OrderConfirmation($orderConfirmationData, $orderProductData, $totalPrice));
 
         self::reset();
 

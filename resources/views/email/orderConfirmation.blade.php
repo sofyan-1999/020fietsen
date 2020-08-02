@@ -4,7 +4,7 @@
 Beste {{ \Illuminate\Support\Facades\Auth::user()->firstname  }} ,
 We hopen dat je het leuk vond om bij ons te shoppen! We sturen jou een mail zodra je bestelling verzonden is.
 <br><br>
-Afleveradres
+<b>Afleveradres</b>
 <br><br>
     {{ \Illuminate\Support\Facades\Auth::user()->firstname." ".\Illuminate\Support\Facades\Auth::user()->suffix." ".\Illuminate\Support\Facades\Auth::user()->lastname }}
 <br>
@@ -16,21 +16,26 @@ Besteldatum: {{ \Carbon\Carbon::now()->format('d-M-Y') }}
 <br><br>
 
 <p><b>Artikelen</b></p>
-{{--@foreach($products as $product)--}}
+
+@foreach($products as $product)
 <img src="http://127.0.0.1:8000/storage/{{ $product->image->first_resized_image }}" alt="img" style="width: 125px; height: 200px;">
 <br>
 Productnaam: {{ $product->title }}
-<br>
-Aantal: {{ $order->quantity }}
-<br>
-Prijs: €{{ $product->price }}
-<br>
+
+<div style="text-align: right">
+    <br>
+    Aantal: {{ $order->quantity }}
+    <br>
+    Prijs: €{{ $product->price }}
+    <br><br>
+</div>
+
 <hr>
-{{--@endforeach--}}
+@endforeach
 <br>
-Betalingswijze: pp
+Betalingswijze: IDEAL
 <br>
 Verzenden: gratis
 <br>
-Totaal: €{{ $order->price }}
+Totaal: €{{ $total }}
 
