@@ -52,7 +52,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                 <p class="bold-text">€{{$product[0]->price}},-</p>
                 <hr>
                 <p><strong>Conditie</strong><br>{{$product[0]->condition}}</p>
-                @if($product[0]->stock == 0)
+                @if($product[0]->stock <= 0)
                     <p><strong>Voorraad</strong><br><span class="color-text">NIET MEER OP VOORAAD</span></p>
                 @else
                     <p><strong>Voorraad</strong><br>{{$product[0]->stock}}</p>

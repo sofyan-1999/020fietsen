@@ -20,6 +20,11 @@ session_start();
 
 Auth::routes();
 
+
+Route::get('/test', function () {
+    return view('email.orderConfirmation');
+});
+
 Route::get('/', function () {
     return view('home.index');
 });

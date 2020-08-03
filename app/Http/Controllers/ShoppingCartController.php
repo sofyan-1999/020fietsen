@@ -39,7 +39,7 @@ class ShoppingCartController extends Controller
                 ->where('products.id', '=', $id)
                 ->get();
 
-            if($product[0]->stock == 0){
+            if($product[0]->stock <= 0){
                 return redirect()->back()->with('message_alert', 'Helaas, we hebben geen artikelen meer op voorraad');
             }
 
@@ -167,7 +167,11 @@ class ShoppingCartController extends Controller
             $orderProduct->save();
 
             $orderConfirmationData = $orderProduct;
-            $orderProductData[] = Product::findOrFail($orderProduct->product_id);
+            $orderProductData[] = DB::table('products')
+                ->join('images', 'products.image_id', '=', 'images.id')
+                ->where('products.id', '=', $orderProduct->product_id)
+                ->get();
+
             $totalPrice += $orderProduct->price;
 
             $product = Product::find($cartProduct['id']);

@@ -38,7 +38,7 @@ class OrderConfirmation extends Mailable
     {
         return $this->subject("Bedankt voor je bestelling!")
             ->from("sofyan_1@hotmail.nl")
-            ->to('ceyhun70@live.nl')
+            ->to('sofyan_1@hotmail.nl')
             ->view('email.orderConfirmation')->with([
                 'order' => $this->order,
                 'products' => $this->orderProduct,

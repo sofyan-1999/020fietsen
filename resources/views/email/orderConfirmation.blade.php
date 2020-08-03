@@ -1,41 +1,70 @@
-
 <h2>Bedankt voor jouw bestelling!</h2>
 <br>
-Beste {{ \Illuminate\Support\Facades\Auth::user()->firstname  }} ,
+<b>Beste {{ Auth::user()->firstname  }},</b>
+<br>
 We hopen dat je het leuk vond om bij ons te shoppen! We sturen jou een mail zodra je bestelling verzonden is.
 <br><br>
-<b>Afleveradres</b>
-<br><br>
-    {{ \Illuminate\Support\Facades\Auth::user()->firstname." ".\Illuminate\Support\Facades\Auth::user()->suffix." ".\Illuminate\Support\Facades\Auth::user()->lastname }}
-<br>
-    {{ \Illuminate\Support\Facades\Auth::user()->street." ".\Illuminate\Support\Facades\Auth::user()->house_number. " ".\Illuminate\Support\Facades\Auth::user()->house_number_suffix }}
-<br>
-    {{ \Illuminate\Support\Facades\Auth::user()->zipcode." ".\Illuminate\Support\Facades\Auth::user()->city }}
-<br><br>
-Besteldatum: {{ \Carbon\Carbon::now()->format('d-M-Y') }}
-<br><br>
+<table class="table" style="width:100%">
+    <tr>
+        <td><b>Afleveradres</b></td>
+        <td style="text-align: right"><b>Bestelnummer</b></td>
+    </tr>
+    <tr>
+        @if(Auth::user()->suffix != "")
+            <td>{{Auth::user()->firstname}} {{Auth::user()->suffix}} {{Auth::user()->lastname}}</td>
+        @else
+            <td>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</td>
+        @endif
+        <td style="text-decoration: underline;text-align: right"><b>{{$order->order_id}}</b></td>
+    </tr>
+    <tr>
+        <td>{{ Auth::user()->street." ".Auth::user()->house_number}}</td>
+        @if(Auth::user()->house_number_suffix == null)
+            <td style="text-align: right"><b>Besteldatum</b></td>
+        @endif
+    </tr>
+    <tr>
+        <td>{{ Auth::user()->house_number_suffix }}</td>
+        @if(Auth::user()->house_number_suffix != null)
+            <td style="text-align: right"><b>Besteldatum</b></td>
+        @endif
+    </tr>
+    <tr>
+        <td>{{ Auth::user()->zipcode." ".Auth::user()->city }}</td>
+        <td style="text-align: right"><b>{{Carbon\Carbon::now()->format('d-M-Y')}}</b></td>
+    </tr>
+</table>
 
 <p><b>Artikelen</b></p>
+<hr>
+<p>TODO</p>
 
 @foreach($products as $product)
-<img src="http://127.0.0.1:8000/storage/{{ $product->image->first_resized_image }}" alt="img" style="width: 125px; height: 200px;">
+<!-- <img src="{{asset('storage/'.$product[0]->first_resized_image)}}" alt="img" style="width: 125px; height: 200px;"> -->
+<b>{{ $product[0]->title }}</b>
+<p style="float: right"><b>€{{$product[0]->price}},-</b></p>
 <br>
-Productnaam: {{ $product->title }}
-
-<div style="text-align: right">
-    <br>
-    Aantal: {{ $order->quantity }}
-    <br>
-    Prijs: €{{ $product->price }}
-    <br><br>
-</div>
+<img src="<?php echo $message->embed('storage/'.$product[0]->first_resized_image); ?>" alt="img" width="140" height="57">
+<span style="vertical-align: top">Aantal: {{ $order->quantity }}</span>
+<br><br>
+@endforeach
 
 <hr>
-@endforeach
-<br>
-Betalingswijze: IDEAL
-<br>
-Verzenden: gratis
-<br>
-Totaal: €{{ $total }}
-
+<table style="width: 100%">
+    <tr>
+        <td>Betalingswijze</td>
+        <td style="text-align: right">IDEAL</td>
+    </tr>
+    <tr>
+        <td>Subtotaal</td>
+        <td style="text-align: right">€{{$total}},-</td>
+    </tr>
+    <tr>
+        <td>Verzending</td>
+        <td style="text-align: right">TODO</td>
+    </tr>
+    <tr>
+        <td><b>Totaal</b></td>
+        <td style="text-align: right"><b>€{{$total}},-</b></td>
+    </tr>
+</table>
