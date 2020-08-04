@@ -18,10 +18,6 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                 <form method="POST" action="{{ route('shoppingCart.address', Auth::user()->id) }}">
                     @csrf
                     {{ method_field('patch') }}
-
-
-
-
                     <div class="form-group">
                         <label for="straat">{{ __('Straat') }}</label>
                         <p class="inline color-text"> *</p>

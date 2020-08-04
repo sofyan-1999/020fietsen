@@ -1,5 +1,7 @@
 @extends('layouts.cart')
-
+@php
+$categories = DB::table('categories')->get();
+@endphp
 @section('content')
 <section class="section section-lg bg-default">
     <div class="container">
@@ -29,7 +31,7 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{str_replace("Password","Wachtwoord", $message)}}</strong>
                                     </span>
                                 @enderror
                             </div>

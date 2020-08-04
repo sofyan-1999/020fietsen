@@ -10,6 +10,8 @@ $categories = DB::table('categories')->get();
                 <div class="card">
                     <div class="card-header">{{ __('Aanmelden') }}</div>
                     <div class="card-body">
+                        <p><strong>Je kunt inloggen op 020fietsen als je een account hebt. Nog geen account? <a class="hover" href="{{URL::asset('/register')}}">Registreer</a> je gratis.</strong></p>
+                        <br>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group">

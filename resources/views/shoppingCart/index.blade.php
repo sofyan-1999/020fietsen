@@ -1,5 +1,6 @@
 @extends('layouts.cart')
 @php
+use Carbon\Carbon;
 $categories = DB::table('categories')->orderBy('name', 'asc')->get();
 @endphp
 @section('content')
@@ -62,7 +63,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                         @if(Auth::check())
                         <a href="{{URL::asset('/shoppingCart/address')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
                         @else
-                        <a href="{{URL::asset('/shoppingCart/login')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
+                        <a href="{{URL::asset('/login')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
                         @endif
                     </div>
                 </div>
@@ -74,7 +75,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                     <div class="card-body">
                         <h4><strong>Verwachte leveringstermijn</strong></h4>
                         <hr>
-                        <p>TODO</p>
+                        <p>{{Carbon::now()->addDays(2)->format('d/m/Y')}} - {{Carbon::now()->addDays(3)->format('d/m/Y')}}</p>
                     </div>
                 </div>
             </div>

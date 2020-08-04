@@ -1,5 +1,6 @@
 @extends('layouts.cart')
 @php
+use Carbon\Carbon;
 $categories = DB::table('categories')->orderBy('name', 'asc')->get();
 @endphp
 @section('content')
@@ -70,7 +71,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                     <div class="card-body">
                         <h4><strong>Verwachte leveringstermijn</strong></h4>
                         <hr>
-                        <p>TODO</p>
+                        <p>{{Carbon::now()->addDays(2)->format('d/m/Y')}} - {{Carbon::now()->addDays(3)->format('d/m/Y')}}</p>
                     </div>
                 </div>
             </div>

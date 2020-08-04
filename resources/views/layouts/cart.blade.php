@@ -7,8 +7,9 @@ if(isset($_SESSION['cart'])){
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
     <head>
-        <title>020 Fietsen</title>
+        <title>020 Fietsen - Goedkope fietsen in Amsterdam</title>
         <meta charset="utf-8">
+        <meta name="description" content="Ons fietsenwinkel biedt een groot voorraad aan goedkope fietsen. Verschillende A-merken waaronder Gazelle, Sparta, Batavus, Giant en vele anderen."/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="apple-touch-icon" sizes="180x180" href="{{URL::asset('/images/apple-touch-icon.png')}}">
@@ -85,7 +86,6 @@ if(isset($_SESSION['cart'])){
                                         </form>
                                         @else
                                         <li class="rd-nav-item {{ Request::is('login') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a></li>
-                                        <li class="rd-nav-item {{ Request::is('register') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route ('register') }}">Registreren</a></li>
                                         @endif
                                     </ul>
                                 </div>

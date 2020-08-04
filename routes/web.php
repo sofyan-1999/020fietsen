@@ -46,9 +46,7 @@ Route::post('/contact', function(Request $request){
 Route::get('/shoppingCart', function () {
     return view('shoppingCart.index');
 });
-Route::get('/shoppingCart/login', function () {
-    return view('shoppingCart.login');
-});
+
 Route::get('/shoppingCart/address', function () {
     return view('shoppingCart.address');
 })->middleware('auth');
