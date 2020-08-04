@@ -24,10 +24,10 @@ class UserUpdate extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => ['required', 'string', 'max:100'],
-            'lastname' => ['required', 'string', 'max:100'],
+            'voornaam' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:100'],
+            'tussenvoegsel' => ['nullable', 'regex:/^[a-zA-Z ]+$/'],
+            'achternaam' => ['required', 'regex:/^[a-zA-Z ]+$/', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 }

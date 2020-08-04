@@ -22,11 +22,10 @@ class UserController extends Controller
     public function update(UserUpdate $request)
     {
         $user = User::where('id' , Auth::user()->id)->first();
-        $user->firstname = $request['firstname'];
-        $user->suffix = $request['suffix'];
-        $user->lastname = $request['lastname'];
-        $user->email = $request['email'];
-        $user->password = $request['password'];
+        $user->firstname = ucwords(trim($request['voornaam']));
+        $user->suffix = trim($request['tussenvoegsel']);
+        $user->lastname = ucwords(trim($request['achternaam']));
+        $user->email = trim($request['email']);
 
         $user->save();
 

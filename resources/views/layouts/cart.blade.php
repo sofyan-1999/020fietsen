@@ -78,12 +78,18 @@ if(isset($_SESSION['cart'])){
                                             </a>
                                         </li>
                                         @if(Auth::check())
-                                        <li class="rd-nav-item"><a href="{{ route('logout') }}" class="rd-nav-link"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Uitloggen
-                                        </a></li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                            {{ csrf_field() }}
-                                        </form>
+                                        <li class="rd-nav-item  {{ Request::is('account/edit') ? 'active' : '' }}">
+                                            <a class="rd-nav-link dropdown-toggle" href="#" id="navbarDropdownProfile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{Auth::user()->firstname}}
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                                                <a class="dropdown-item" href="{{URL::asset('/account/edit')}}">Mijn profiel</a>
+                                                <a href="{{ route('logout') }}" class="dropdown-item"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
+                                        </li>
                                         @else
                                         <li class="rd-nav-item {{ Request::is('login') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a></li>
                                         @endif
