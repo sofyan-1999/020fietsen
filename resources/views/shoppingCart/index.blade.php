@@ -63,7 +63,7 @@ $categories = DB::table('categories')->orderBy('name', 'asc')->get();
                         @if(Auth::check())
                         <a href="{{URL::asset('/shoppingCart/address')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
                         @else
-                        <a href="{{URL::asset('/shoppingCart/login')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
+                        <a href="{{URL::asset('/login')}}"><button class="btn btn-primary max-width-button">Naar de kassa</button></a>
                         @endif
                     </div>
                 </div>

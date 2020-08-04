@@ -87,7 +87,6 @@ if(isset($_SESSION['cart'])){
                                         </form>
                                         @else
                                         <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a></li>
-                                        <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route ('register') }}">Registreren</a></li>
                                         @endif
                                     </ul>
                                 </div>

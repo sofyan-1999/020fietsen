@@ -86,7 +86,6 @@ if(isset($_SESSION['cart'])){
                                         </form>
                                         @else
                                         <li class="rd-nav-item {{ Request::is('login') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route ('login') }}">Inloggen</a></li>
-                                        <li class="rd-nav-item {{ Request::is('register') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route ('register') }}">Registreren</a></li>
                                         @endif
                                     </ul>
                                 </div>
