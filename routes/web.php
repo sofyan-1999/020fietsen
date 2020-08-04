@@ -61,6 +61,7 @@ Route::get('/success', function () {
     return view('order.success');
 })->middleware('auth');
 
+
 Route::patch('address/{id}',  ['as' => 'shoppingCart.address', 'uses' => 'ShoppingCartController@address'])->middleware('auth');
 
 Route::get('/add/{id}', 'ShoppingCartController@addToCart');
@@ -71,6 +72,15 @@ Route::get('/mollietest', 'ShoppingCartController@preparePayment');
 
 
 // category
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/account','UserController@get')->middleware('auth');
+
+Route::get('/account/edit','UserController@getEditView');
+Route::post('/account/edit/post','UserController@update')->middleware('auth')->name('updateUser');
+
+
 Route::get('/category/create', 'CategoryController@create')->middleware('auth');
 
 Route::post('/category', 'CategoryController@store')->middleware('auth');
