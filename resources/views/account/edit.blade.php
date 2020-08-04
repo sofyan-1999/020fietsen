@@ -95,7 +95,7 @@
             @csrf
 
             <div class="form row">
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-3">
                     <label for="firstname">{{ __('voornaam') }}</label>
                     <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ \Illuminate\Support\Facades\Auth::user()->firstname }}" required autocomplete="firstname" autofocus>
 
@@ -106,7 +106,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-sm-2">
+                <div class="form-group col-sm-2 mr-3">
                     <label for="suffix">{{ __('tussenvoegsel') }}</label>
                     <input id="suffix" type="text" class="form-control @error('suffix') is-invalid @enderror" name="suffix" value="{{ \Illuminate\Support\Facades\Auth::user()->suffix  }}" autocomplete="suffix" autofocus>
 
@@ -117,7 +117,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-3 ml-1">
                     <label for="surname">{{ __('achternaam') }}</label>
                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="lastname" value="{{ \Illuminate\Support\Facades\Auth::user()->lastname  }}" required autocomplete="surname" autofocus>
 
@@ -141,7 +141,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-sm-4 pl-2">
+                <div class="form-group col-sm-3 pl-2">
                     <label for="password">{{ __('wachtwoord') }}</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -151,15 +151,14 @@
                                 </span>
                     @enderror
                 </div>
-            </div>
 
-            <div class="form row">
-                <div class="form-group col-sm-5">
+                <div class="form-group col-sm-3">
                     <label for="password-confirm">{{ __('bevestig wachtwoord') }}</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
             </div>
 
+            <br>
             <button type="submit" class="btn btn-primary">
                 {{ __('Update') }}
             </button>

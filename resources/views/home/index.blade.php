@@ -173,7 +173,7 @@ $products = DB::table('products')->where('home', '=', 1)->get();
                             <div class="wow fadeInUp">
                                 <div class="product-featured">
                                     <div class="product-featured-figure">
-                                        <img src="{{asset('storage/'.$product->image)}}" alt="" width="370" height="395"/>
+                                        {{--<img src="{{asset('storage/'.$product->image)}}" alt="" width="370" height="395"/>--}}
                                         <div class="product-featured-button"><a class="button button-primary" href="{{URL::asset('/product/' . $product->id)}}">Bekijk</a></div>
                                     </div>
                                     <div class="product-featured-caption">
